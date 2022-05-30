@@ -15,7 +15,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "vitro",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
@@ -162,9 +162,21 @@
             }
           },
           "defaultConfiguration": "production"
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
+          }
         }
       }
     }
   },
-  "defaultProject": "Vitro-angular"
+  "defaultProject": "Vitro-angular",
+  "cli": {
+    "defaultCollection": "@angular-eslint/schematics"
+  }
 }
