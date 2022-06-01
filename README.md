@@ -1,3 +1,6 @@
+[![Build Status](https://github.com/vivo-project/Vitro-angular/workflows/Build/badge.svg?branch=main)](https://github.com/vivo-project/Vitro-angular/actions?query=workflow%3ABuild)
+[![Coverage Status](https://codecov.io/gh/vivo-project/Vitro-angular/branch/main/graph/badge.svg)](https://codecov.io/gh/vivo-project/Vitro-angular)
+
 # Vitro Angular
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.7.
