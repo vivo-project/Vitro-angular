@@ -46,3 +46,6 @@ jobs:
 
     - name: Test
       run: xvfb-run --auto-servernum npm run test
+
+    - name: Upload coverage to Codecov.io
+      uses: codecov/codecov-action@v2
