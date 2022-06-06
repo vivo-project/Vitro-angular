@@ -21,7 +21,7 @@ const MODULES: any[] = [
     metaReducers
   }),
   StoreRouterConnectingModule.forRoot(),
-  TranslocoRootModule
+  TranslocoRootModule,
 ];
 
 const COMPONENTS: any[] = [];

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, NgModule } from '@angular/core';
 import {
-  getBrowserLang,
   Translation,
   translocoConfig,
   TranslocoLoader,
@@ -27,7 +26,8 @@ export class TranslocoHttpLoader implements TranslocoLoader {
       provide: TRANSLOCO_CONFIG,
       useValue: translocoConfig({
         availableLangs: ['en', 'es'],
-        defaultLang: getBrowserLang(),
+        defaultLang: 'en',
+        fallbackLang: 'en',
         reRenderOnLangChange: true,
         prodMode: environment.production,
       })
