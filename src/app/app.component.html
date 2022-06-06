@@ -1,1 +1,20 @@
-<router-outlet></router-outlet>
+<mat-drawer-container class="app-container" autosize>
+
+  <mat-drawer class="app-sidenav" mode="side" opened>
+    <!-- menu component -->
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <div class="app-sidenav-content">
+      <div fxLayout="column" fxFlexFill>
+        <!-- header component -->
+        <main fxFlex>
+          <!-- breadcrumb component -->
+          <router-outlet></router-outlet>
+        </main>
+        <!-- footer component -->
+      </div>
+    </div>
+  </mat-drawer-content>
+
+</mat-drawer-container>
