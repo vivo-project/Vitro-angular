@@ -175,8 +175,5 @@
       }
     }
   },
-  "defaultProject": "Vitro-angular",
-  "cli": {
-    "defaultCollection": "@angular-eslint/schematics"
-  }
+  "defaultProject": "Vitro-angular"
 }
