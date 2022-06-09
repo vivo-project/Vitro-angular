@@ -10,7 +10,7 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
-import { metaReducers, reducers } from '../reducers';
+import { metaReducers, reducers } from './store';
 import { TranslocoRootModule } from './transloco-root.module';
 
 const MODULES: any[] = [
