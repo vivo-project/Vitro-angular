@@ -2,17 +2,17 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromRestDocs from './rest-docs.reducer';
 
 export const selectRestDocsState = createFeatureSelector<fromRestDocs.State>(
-  fromRestDocs.restDocsFeatureKey
+  fromRestDocs.restDocsFeatureKey,
 );
 export const selectIsFetchingDocs = createSelector(
   selectRestDocsState,
-  fromRestDocs.selectFetchingDocs
+  fromRestDocs.selectFetchingDocs,
 );
 export const selectRestDocs = createSelector(
   selectRestDocsState,
-  fromRestDocs.selectData
+  fromRestDocs.selectData,
 );
 export const selectErrorFetchingRestDocs = createSelector(
   selectRestDocsState,
-  fromRestDocs.selectError
+  fromRestDocs.selectError,
 );

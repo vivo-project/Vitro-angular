@@ -23,7 +23,7 @@ describe('RestDocs Reducer', () => {
     it('should return the previous state with fetchingDocs false and data defined', () => {
       const result = reducer(
         initialState,
-        RestDocsActions.loadRestDocsSuccess({ data: {} })
+        RestDocsActions.loadRestDocsSuccess({ data: {} }),
       );
 
       expect(result).toEqual({
@@ -35,7 +35,7 @@ describe('RestDocs Reducer', () => {
     it('should return the previous state with fetchingDocs false and error defined', () => {
       const result = reducer(
         initialState,
-        RestDocsActions.loadRestDocsFailure({ error: {} })
+        RestDocsActions.loadRestDocsFailure({ error: {} }),
       );
 
       expect(result).toEqual({

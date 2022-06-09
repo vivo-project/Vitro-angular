@@ -31,7 +31,7 @@ export const reducer = createReducer(
     fetchingDocs: false,
     data: {},
     error,
-  }))
+  })),
 );
 
 export const selectFetchingDocs = (state: State) => state.fetchingDocs;

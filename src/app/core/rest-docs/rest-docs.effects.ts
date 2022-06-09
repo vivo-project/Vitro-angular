@@ -20,16 +20,16 @@ export class RestDocsEffects implements OnInitEffects {
           .pipe(
             map((data) => restDocsActions.loadRestDocsSuccess({ data })),
             catchError((error) =>
-              of(restDocsActions.loadRestDocsFailure({ error }))
-            )
-          )
-      )
+              of(restDocsActions.loadRestDocsFailure({ error })),
+            ),
+          ),
+      ),
     );
   });
 
   constructor(
     private readonly actions: Actions,
-    private readonly http: HttpClient
+    private readonly http: HttpClient,
   ) {}
 
   ngrxOnInitEffects(): Action {
