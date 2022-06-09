@@ -18,15 +18,15 @@ import { TranslocoRootModule } from './transloco-root.module';
 const MODULES: any[] = [
   EffectsModule.forRoot([RestDocsEffects]),
   HttpClientModule,
-  StoreDevtoolsModule.instrument({
-    maxAge: 25,
-    logOnly: environment.production,
-  }),
   StoreModule.forRoot(reducers, {
     metaReducers,
   }),
   StoreModule.forFeature(fromRestDocs.restDocsFeatureKey, fromRestDocs.reducer),
   StoreRouterConnectingModule.forRoot(),
+  StoreDevtoolsModule.instrument({
+    maxAge: 25,
+    logOnly: environment.production,
+  }),
   TranslocoRootModule,
 ];
 
