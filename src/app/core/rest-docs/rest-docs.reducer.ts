@@ -17,7 +17,7 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-  on(RestDocsActions.loadRestDocs, (state, {}) => ({
+  on(RestDocsActions.loadRestDocs, (state, { }) => ({
     ...state,
     fetchingDocs: true,
   })),
@@ -29,6 +29,7 @@ export const reducer = createReducer(
   on(RestDocsActions.loadRestDocsFailure, (state, { error }) => ({
     ...state,
     fetchingDocs: false,
+    data: {},
     error,
   }))
 );

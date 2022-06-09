@@ -12,7 +12,7 @@ export const selectRestDocs = createSelector(
   selectRestDocsState,
   fromRestDocs.selectData
 );
-export const selectErrorFetchRestDocs = createSelector(
+export const selectErrorFetchingRestDocs = createSelector(
   selectRestDocsState,
   fromRestDocs.selectError
 );
