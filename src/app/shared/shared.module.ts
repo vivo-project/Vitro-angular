@@ -2,10 +2,7 @@ import { NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TranslocoModule } from '@ngneat/transloco';
 
-const MODULES: any[] = [
-  MatSidenavModule,
-  TranslocoModule
-];
+const MODULES: any[] = [MatSidenavModule, TranslocoModule];
 
 const PIPES: any[] = [];
 
@@ -23,4 +20,4 @@ const PROVIDERS: any[] = [];
   imports: [...MODULES],
   providers: [...PROVIDERS],
 })
-export class SharedModule { }
+export class SharedModule {}
