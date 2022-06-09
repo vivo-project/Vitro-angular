@@ -21,7 +21,10 @@ describe('RestDocs Reducer', () => {
       });
     });
     it('should return the previous state with fetchingDocs false and data defined', () => {
-      const result = reducer(initialState, RestDocsActions.loadRestDocsSuccess({ data: {} }));
+      const result = reducer(
+        initialState,
+        RestDocsActions.loadRestDocsSuccess({ data: {} })
+      );
 
       expect(result).toEqual({
         ...initialState,
@@ -30,7 +33,10 @@ describe('RestDocs Reducer', () => {
       });
     });
     it('should return the previous state with fetchingDocs false and error defined', () => {
-      const result = reducer(initialState, RestDocsActions.loadRestDocsFailure({ error: {} }));
+      const result = reducer(
+        initialState,
+        RestDocsActions.loadRestDocsFailure({ error: {} })
+      );
 
       expect(result).toEqual({
         ...initialState,

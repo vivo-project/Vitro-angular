@@ -2,7 +2,9 @@ import * as RestDocsActions from './rest-docs.actions';
 
 describe('loadRestDocs', () => {
   it('should return an action', () => {
-    expect(RestDocsActions.loadRestDocs().type).toBe('[RestDocs] Load RestDocs');
+    expect(RestDocsActions.loadRestDocs().type).toBe(
+      '[RestDocs] Load RestDocs'
+    );
   });
 });
 

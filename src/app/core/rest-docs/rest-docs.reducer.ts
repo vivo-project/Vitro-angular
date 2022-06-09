@@ -17,7 +17,7 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-  on(RestDocsActions.loadRestDocs, (state, { }) => ({
+  on(RestDocsActions.loadRestDocs, (state, {}) => ({
     ...state,
     fetchingDocs: true,
   })),
