@@ -3,24 +3,30 @@ import {
   ModuleWithProviders,
   NgModule,
   Optional,
-  SkipSelf
+  SkipSelf,
 } from '@angular/core';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
-import { metaReducers, reducers } from '../reducers';
+import { metaReducers, reducers } from './reducers';
+import { RestApiEffects } from './rest-api/rest-api.effects';
+import * as fromRestApi from './rest-api/rest-api.reducer';
 import { TranslocoRootModule } from './transloco-root.module';
 
 const MODULES: any[] = [
-  EffectsModule.forRoot([]),
+  EffectsModule.forRoot([RestApiEffects]),
   HttpClientModule,
-  StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   StoreModule.forRoot(reducers, {
-    metaReducers
+    metaReducers,
   }),
+  StoreModule.forFeature(fromRestApi.restApiFeatureKey, fromRestApi.reducer),
   StoreRouterConnectingModule.forRoot(),
+  StoreDevtoolsModule.instrument({
+    maxAge: 25,
+    logOnly: environment.production,
+  }),
   TranslocoRootModule,
 ];
 

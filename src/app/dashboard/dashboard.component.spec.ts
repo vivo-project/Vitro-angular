@@ -11,11 +11,7 @@ describe('DashboardComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DashboardComponent],
-      imports: [
-        RouterTestingModule,
-        SharedModule,
-        getTranslocoModule(),
-      ],
+      imports: [RouterTestingModule, SharedModule, getTranslocoModule()],
     }).compileComponents();
   });
 

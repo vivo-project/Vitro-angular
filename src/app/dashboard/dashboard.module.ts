@@ -7,4 +7,4 @@ import { DashboardComponent } from './dashboard.component';
   declarations: [DashboardComponent],
   imports: [DashboardRoutingModule, SharedModule],
 })
-export class DashboardModule { }
+export class DashboardModule {}
