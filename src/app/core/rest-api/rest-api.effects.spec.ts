@@ -1,19 +1,18 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { provideMockStore } from '@ngrx/store/testing';
+import { createSpyFromClass, Spy } from 'jasmine-auto-spies';
 import { Observable, of } from 'rxjs';
+import * as RestApiActions from './rest-api.actions';
 import { RestApiEffects } from './rest-api.effects';
 import * as fromRestApi from './rest-api.reducer';
-import * as RestApiActions from './rest-api.actions';
 
 describe('RestApiEffects', () => {
   let actions: Observable<any>;
   let effects: RestApiEffects;
-  const httpClientSpy = jasmine.createSpyObj('HttpClient', {
-    get: of({}),
-  });
+  let httpClientSpy: Spy<HttpClient>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -26,18 +25,21 @@ describe('RestApiEffects', () => {
           },
         }),
         provideMockActions(() => actions),
-        { provide: HttpClient, useValue: httpClientSpy },
+        { provide: HttpClient, useValue: createSpyFromClass(HttpClient) },
       ],
     });
 
     effects = TestBed.inject<RestApiEffects>(RestApiEffects);
+    httpClientSpy = TestBed.inject<any>(HttpClient);
   });
 
   it('should be created', () => {
     expect(effects).toBeTruthy();
   });
 
-  it('should fetch rest docs', (done) => {
+  it('should succeed fetching rest docs', (done) => {
+    httpClientSpy.get.and.nextWith({});
+
     actions = of(RestApiActions.loadRestApi());
 
     effects.loadRestApi.subscribe((action) => {
@@ -48,6 +50,26 @@ describe('RestApiEffects', () => {
       done();
     });
 
-    expect(httpClientSpy.get).toHaveBeenCalled();
+    effects.ngrxOnInitEffects();
+
+    expect(httpClientSpy.get.calls.count()).toBe(1);
+  });
+
+  it('should fail fetching rest docs', (done) => {
+    httpClientSpy.get.and.throwWith({});
+
+    actions = of(RestApiActions.loadRestApi());
+
+    effects.loadRestApi.subscribe((action) => {
+      expect(action).toEqual({
+        type: '[RestApi] Load RestApi Failure',
+        error: {},
+      });
+      done();
+    });
+
+    effects.ngrxOnInitEffects();
+
+    expect(httpClientSpy.get.calls.count()).toBe(1);
   });
 });
