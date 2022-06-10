@@ -4,13 +4,13 @@ import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { provideMockStore } from '@ngrx/store/testing';
 import { Observable, of } from 'rxjs';
-import { RestDocsEffects } from './rest-docs.effects';
-import * as fromRestDocs from './rest-docs.reducer';
-import * as RestDocsActions from './rest-docs.actions';
+import { RestApiEffects } from './rest-api.effects';
+import * as fromRestApi from './rest-api.reducer';
+import * as RestApiActions from './rest-api.actions';
 
-describe('RestDocsEffects', () => {
+describe('RestApiEffects', () => {
   let actions: Observable<any>;
-  let effects: RestDocsEffects;
+  let effects: RestApiEffects;
   const httpClientSpy = jasmine.createSpyObj('HttpClient', {
     get: of({}),
   });
@@ -19,10 +19,10 @@ describe('RestDocsEffects', () => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
-        RestDocsEffects,
+        RestApiEffects,
         provideMockStore({
           initialState: {
-            [fromRestDocs.restDocsFeatureKey]: fromRestDocs.initialState,
+            [fromRestApi.restApiFeatureKey]: fromRestApi.initialState,
           },
         }),
         provideMockActions(() => actions),
@@ -30,7 +30,7 @@ describe('RestDocsEffects', () => {
       ],
     });
 
-    effects = TestBed.inject<RestDocsEffects>(RestDocsEffects);
+    effects = TestBed.inject<RestApiEffects>(RestApiEffects);
   });
 
   it('should be created', () => {
@@ -38,11 +38,11 @@ describe('RestDocsEffects', () => {
   });
 
   it('should fetch rest docs', (done) => {
-    actions = of(RestDocsActions.loadRestDocs());
+    actions = of(RestApiActions.loadRestApi());
 
-    effects.loadRestDocs.subscribe((action) => {
+    effects.loadRestApi.subscribe((action) => {
       expect(action).toEqual({
-        type: '[RestDocs] Load RestDocs Success',
+        type: '[RestApi] Load RestApi Success',
         data: {},
       });
       done();

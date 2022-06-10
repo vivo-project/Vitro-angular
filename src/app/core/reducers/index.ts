@@ -1,13 +1,13 @@
 import { ActionReducerMap, MetaReducer } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
-import * as fromRestDocs from '../rest-docs/rest-docs.reducer';
+import * as fromRestApi from '../rest-api/rest-api.reducer';
 
 export interface State {
-  [fromRestDocs.restDocsFeatureKey]: fromRestDocs.State;
+  [fromRestApi.restApiFeatureKey]: fromRestApi.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  [fromRestDocs.restDocsFeatureKey]: fromRestDocs.reducer,
+  [fromRestApi.restApiFeatureKey]: fromRestApi.reducer,
 };
 
 export const metaReducers: MetaReducer<State>[] = !environment.production

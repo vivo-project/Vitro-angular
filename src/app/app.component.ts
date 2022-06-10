@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import * as fromRestDocs from './core/rest-docs/rest-docs.reducer';
-import { selectRestDocs } from './core/rest-docs/rest-docs.selectors';
+import * as fromRestApi from './core/rest-api/rest-api.reducer';
+import { selectRestApi } from './core/rest-api/rest-api.selectors';
 
 @Component({
   selector: 'vitro-root',
@@ -9,10 +9,10 @@ import { selectRestDocs } from './core/rest-docs/rest-docs.selectors';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor(private readonly store: Store<fromRestDocs.State>) {}
+  constructor(private readonly store: Store<fromRestApi.State>) {}
 
   ngOnInit(): void {
-    this.store.pipe(select(selectRestDocs)).subscribe((data) => {
+    this.store.pipe(select(selectRestApi)).subscribe((data) => {
       console.log(data);
     });
   }
