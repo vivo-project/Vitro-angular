@@ -16,9 +16,9 @@ describe('RestApi Selectors', () => {
     expect(result).toEqual(false);
   });
   it('should select rest api', () => {
-    const result = RestApiSelectors.selectRestApi(initialState);
+    const result = RestApiSelectors.selectOpenApi(initialState);
 
-    expect(result).toEqual({});
+    expect(result).toEqual('');
   });
   it('should select error fetching rest api', () => {
     const result = RestApiSelectors.selectErrorFetchingRestApi(initialState);

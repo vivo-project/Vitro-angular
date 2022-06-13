@@ -1,8 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { TranslocoModule } from '@ngneat/transloco';
 
-const MODULES: any[] = [MatSidenavModule, TranslocoModule];
+const MODULES: any[] = [
+  CommonModule,
+  MatDividerModule,
+  MatListModule,
+  MatSidenavModule,
+  TranslocoModule,
+];
 
 const PIPES: any[] = [];
 

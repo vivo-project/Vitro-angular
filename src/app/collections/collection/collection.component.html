@@ -1,0 +1,21 @@
+<ng-container *ngIf="api | async; let api">
+  <h1>{{ api.tag.description }}</h1>
+  <mat-accordion class="example-headers-align" multi>
+    <ng-template ngFor let-entry [ngForOf]="api.paths | keyvalue" let-i="index" [ngForTrackBy]="trackByFn">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{ entry.key }}
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-template ngFor let-request [ngForOf]="entry.value | keyvalue" let-j="index" let-last="last" [ngForTrackBy]="trackByFn">
+          <div>
+            <span>{{ request.key }}</span>
+            <p>{{ request.value | json }}</p>
+          </div>
+          <mat-divider *ngIf="!last" ></mat-divider>
+        </ng-template>
+      </mat-expansion-panel>
+    </ng-template>
+  </mat-accordion>
+</ng-container>
