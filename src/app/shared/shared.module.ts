@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -7,6 +8,7 @@ import { TranslocoModule } from '@ngneat/transloco';
 
 const MODULES: any[] = [
   CommonModule,
+  FlexLayoutModule,
   MatDividerModule,
   MatListModule,
   MatSidenavModule,

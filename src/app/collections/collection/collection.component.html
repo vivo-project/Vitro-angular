@@ -1,10 +1,23 @@
 <ng-container *ngIf="api | async; let api">
-  <h1>{{ api.tag.description }}</h1>
+  <div fxLayout="row">
+    <div fxFlex>
+      <h1>{{ api.tag.description }}</h1>
+    </div>
+    <div fxFlex fxLayoutAlign="end start">
+      <a [routerLink]="['create']">
+        <button mat-mini-fab color="primary" >
+          <mat-icon>add</mat-icon>
+        </button>
+      </a>
+    </div>
+  </div>
   <ng-container *ngIf="collection | async; let collection">
     <mat-card>
       <mat-selection-list [multiple]="false">
         <ng-template ngFor let-individual [ngForOf]="collection.result" let-i="index" [ngForTrackBy]="trackByFn">
-          <a [routerLink]="[getResourceId(individual)]" class="link"><mat-list-option>{{ individual.label }}</mat-list-option></a>
+          <a [routerLink]="[getResourceId(individual)]" class="link">
+            <mat-list-option>{{ individual.label }}</mat-list-option>
+          </a>
           <mat-divider></mat-divider>
         </ng-template>
       </mat-selection-list>

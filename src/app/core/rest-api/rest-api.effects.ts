@@ -14,9 +14,12 @@ export class RestApiEffects implements OnInitEffects {
       ofType(restApiActions.loadRestApi),
       concatMap(() =>
         this.http
-          .get(`${environment.apiBaseUrl}/docs/rest/1.0.0`, {
-            headers: { Accept: 'application/json' },
-          })
+          .get(
+            `${environment.apiBaseUrl}/docs/rest/${environment.restVersion}`,
+            {
+              headers: { Accept: 'application/json' },
+            },
+          )
           .pipe(
             map((data) => restApiActions.loadRestApiSuccess({ data })),
             catchError((error) =>

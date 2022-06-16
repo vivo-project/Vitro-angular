@@ -1,0 +1,42 @@
+<ng-container *ngIf="api | async; let api">
+  <div fxLayout="row">
+    <div fxFlex>
+      <h1>{{ api.tag.description }}</h1>
+    </div>
+    <div fxFlex fxLayoutAlign="end start">
+
+    </div>
+  </div>
+  <ng-container>
+    <form [formGroup]="form" (ngSubmit)="onSubmit(api)">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title *ngIf="(individual | async) === undefined">Create</mat-card-title>
+          <mat-card-title *ngIf="individual | async">Update</mat-card-title>
+          <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Label</mat-label>
+            <input matInput formControlName="label" required cdkFocusInitial>
+            <mat-error *ngIf="form.controls['label'].hasError('required')">Label is required</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>URI</mat-label>
+            <input matInput formControlName="uri">
+            <mat-error *ngIf="form.controls['uri'].hasError('required')">URI is required</mat-error>
+          </mat-form-field>
+
+          <!-- TODO: iterate over properties creating appropriate form fields -->
+
+        </mat-card-content>
+        <mat-card-actions align="end">
+          <button type="button" mat-button [disabled]="form.pristine" color="warn" (click)="onReset()">RESET</button>
+          <button type="submit" mat-button [disabled]="!form.dirty || !form.valid">SUBMIT</button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+  </ng-container>
+</ng-container>

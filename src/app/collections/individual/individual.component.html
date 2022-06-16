@@ -1,13 +1,27 @@
 <ng-container *ngIf="api | async; let api">
-  <h1>{{ api.tag.description }}</h1>
+  <div fxLayout="row">
+    <div fxFlex>
+      <h1>{{ api.tag.description }}</h1>
+    </div>
+    <div fxFlex fxLayoutAlign="end start">
+
+    </div>
+  </div>
   <ng-container *ngIf="individual | async; let individual">
     <mat-card>
       <mat-card-header>
         <mat-card-title>{{ individual.label }}</mat-card-title>
         <mat-card-subtitle>{{ individual.uri }}</mat-card-subtitle>
       </mat-card-header>
-      <mat-card-content></mat-card-content>
-      <mat-card-actions></mat-card-actions>
+      <mat-card-content>
+
+        <!-- iterate properties and render values from individual -->
+
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <a mat-button color="warn" disabled>DELETE</a>
+        <a mat-button [routerLink]="['update']">UPDATE</a>
+      </mat-card-actions>
     </mat-card>
   </ng-container>
 </ng-container>

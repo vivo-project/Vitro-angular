@@ -13,8 +13,11 @@ export class CollectionResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     const collection = route.paramMap.get('collection') as string;
 
-    return this.http.get(`${environment.apiBaseUrl}/rest/1.0.0/${collection}`, {
-      headers: { Accept: 'application/json' },
-    });
+    return this.http.get(
+      `${environment.apiBaseUrl}/rest/${environment.restVersion}/${collection}`,
+      {
+        headers: { Accept: 'application/json' },
+      },
+    );
   }
 }

@@ -16,7 +16,7 @@ export class IndividualResolver implements Resolve<any> {
 
     return this.http
       .get(
-        `${environment.apiBaseUrl}/rest/1.0.0/${collection}/resource:${resource}`,
+        `${environment.apiBaseUrl}/rest/${environment.restVersion}/${collection}/resource:${resource}`,
         {
           headers: { Accept: 'application/json' },
         },

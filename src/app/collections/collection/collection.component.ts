@@ -10,9 +10,8 @@ import { Api } from 'src/app/core/rest-api/rest-api.reducer';
 })
 export class CollectionComponent implements OnInit {
   api!: Observable<Api>;
-  collection!: Observable<any>;
 
-  displayedColumns: string[] = ['label', 'uri'];
+  collection!: Observable<any>;
 
   constructor(private readonly route: ActivatedRoute) {}
 
