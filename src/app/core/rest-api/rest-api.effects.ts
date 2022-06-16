@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType, OnInitEffects } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { of } from 'rxjs';
@@ -14,7 +14,7 @@ export class RestApiEffects implements OnInitEffects {
       ofType(restApiActions.loadRestApi),
       concatMap(() =>
         this.http
-          .get(`${environment.apiBaseUrl}/docs/rest/1`, {
+          .get(`${environment.apiBaseUrl}/docs/rest/1.0.0`, {
             headers: { Accept: 'application/json' },
           })
           .pipe(
@@ -30,7 +30,6 @@ export class RestApiEffects implements OnInitEffects {
   constructor(
     private readonly actions: Actions,
     private readonly http: HttpClient,
-    @Inject(PLATFORM_ID) private readonly platformId: Object,
   ) {}
 
   ngrxOnInitEffects(): Action {

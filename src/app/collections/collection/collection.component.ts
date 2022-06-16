@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { Api } from '../../core/rest-api/rest-api.reducer';
+import { Api } from 'src/app/core/rest-api/rest-api.reducer';
 
 @Component({
   selector: 'vitro-collection',
@@ -10,11 +10,19 @@ import { Api } from '../../core/rest-api/rest-api.reducer';
 })
 export class CollectionComponent implements OnInit {
   api!: Observable<Api>;
+  collection!: Observable<any>;
+
+  displayedColumns: string[] = ['label', 'uri'];
 
   constructor(private readonly route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.api = this.route.data.pipe(map((data) => data['api']));
+    this.collection = this.route.data.pipe(map((data) => data['collection']));
+  }
+
+  getResourceId(individual: any): string {
+    return btoa(individual.uri);
   }
 
   trackByFn(index: number): number {
