@@ -12,7 +12,7 @@ import { selectResourceById } from './collection.selectors';
 export class ResourceResolver implements Resolve<any> {
   constructor(private store: Store<fromCollection.State>) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<any[]> {
+  resolve(route: ActivatedRouteSnapshot): Observable<any> {
     const collection = route.paramMap.get('collection') as string;
     const id = route.paramMap.get('resource') as string;
 
