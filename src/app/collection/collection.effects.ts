@@ -64,7 +64,7 @@ export class CollectionEffects {
             },
           )
           .pipe(
-            map((data) =>
+            map(() =>
               CollectionActions.createResourceSuccess({ collection, resource }),
             ),
             catchError((error) =>
@@ -88,7 +88,7 @@ export class CollectionEffects {
             },
           )
           .pipe(
-            map((data) =>
+            map(() =>
               CollectionActions.updateResourceSuccess({ collection, resource }),
             ),
             catchError((error) =>
@@ -100,15 +100,14 @@ export class CollectionEffects {
   });
 
   createOrUpdateResourceSuccess = createEffect(
-    () => {
-      return this.actions.pipe(
+    () =>
+      this.actions.pipe(
         ofType(
           CollectionActions.createResourceSuccess,
           CollectionActions.updateResourceSuccess,
         ),
         map(({ collection }) => this.router.navigate([`rest/${collection}`])),
-      );
-    },
+      ),
     {
       dispatch: false,
     },
