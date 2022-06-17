@@ -11,8 +11,8 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit(api)">
       <mat-card>
         <mat-card-header>
-          <mat-card-title *ngIf="(individual | async) === undefined">Create</mat-card-title>
-          <mat-card-title *ngIf="individual | async">Update</mat-card-title>
+          <mat-card-title *ngIf="(resource | async) === undefined">Create</mat-card-title>
+          <mat-card-title *ngIf="resource | async">Update</mat-card-title>
           <mat-card-subtitle></mat-card-subtitle>
         </mat-card-header>
         <mat-card-content>

@@ -2,21 +2,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { getTranslocoModule } from '../../core/transloco-testing.module';
 import { SharedModule } from '../../shared/shared.module';
-import { IndividualComponent } from './individual.component';
+import { IndividualViewComponent } from './individual-view.component';
 
-describe('IndividualComponent', () => {
-  let component: IndividualComponent;
-  let fixture: ComponentFixture<IndividualComponent>;
+describe('IndividualViewComponent', () => {
+  let component: IndividualViewComponent;
+  let fixture: ComponentFixture<IndividualViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [IndividualComponent],
+      declarations: [IndividualViewComponent],
       imports: [RouterTestingModule, SharedModule, getTranslocoModule()],
     }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IndividualComponent);
+    fixture = TestBed.createComponent(IndividualViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,8 +1,8 @@
-import { createEntityAdapter, Dictionary, EntityAdapter } from '@ngrx/entity';
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
 import * as RestApiActions from './rest-api.actions';
 
-export const restApiFeatureKey = 'restApi';
+export const featureKey = 'restApi';
 
 export interface Info {
   title: string;
@@ -20,10 +20,8 @@ export interface Api {
   paths: { [path: string]: any };
 }
 
-export interface State {
+export interface State extends EntityState<Api> {
   fetchingRestApi: boolean;
-  ids: string[] | number[];
-  entities: Dictionary<Api>;
   openapi: string;
   info: Info;
   error: any;
@@ -93,8 +91,6 @@ export const { selectIds, selectEntities, selectAll, selectTotal } =
   adapter.getSelectors();
 
 export const selectFetchingRestApi = (state: State) => state.fetchingRestApi;
-
 export const selectOpenApi = (state: State) => state.openapi;
 export const selectInfo = (state: State) => state.info;
-
 export const selectError = (state: State) => state.error;

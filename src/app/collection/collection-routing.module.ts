@@ -1,25 +1,25 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RestApiResolver } from '../core/rest-api/rest-api.resolver';
-import { CollectionComponent } from './collection/collection.component';
-import { CollectionResolver } from './collection/collection.resolver';
-import { CollectionsComponent } from './collections.component';
+import { CollectionComponent } from './collection.component';
+import { CollectionResolver } from './collection.resolver';
 import { IndividualFormComponent } from './individual-form/individual-form.component';
-import { IndividualComponent } from './individual/individual.component';
-import { IndividualResolver } from './individual/individual.resolver';
+import { IndividualListComponent } from './individual-list/individual-list.component';
+import { IndividualViewComponent } from './individual-view/individual-view.component';
+import { ResourceResolver } from './resource.resolver';
 
 const routes: Routes = [
   {
     path: '',
-    component: CollectionsComponent,
+    component: CollectionComponent,
     children: [
       {
         path: ':collection',
         resolve: {
           api: RestApiResolver,
-          collection: CollectionResolver,
+          resources: CollectionResolver,
         },
-        component: CollectionComponent,
+        component: IndividualListComponent,
       },
       {
         path: ':collection/create',
@@ -32,15 +32,15 @@ const routes: Routes = [
         path: ':collection/:resource',
         resolve: {
           api: RestApiResolver,
-          individual: IndividualResolver,
+          resource: ResourceResolver,
         },
-        component: IndividualComponent,
+        component: IndividualViewComponent,
       },
       {
         path: ':collection/:resource/update',
         resolve: {
           api: RestApiResolver,
-          individual: IndividualResolver,
+          resource: ResourceResolver,
         },
         component: IndividualFormComponent,
       },
@@ -52,4 +52,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class CollectionsRoutingModule {}
+export class CollectionRoutingModule {}

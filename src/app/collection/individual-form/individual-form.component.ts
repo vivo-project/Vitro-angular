@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 export class IndividualFormComponent implements OnInit {
   api!: Observable<Api>;
 
-  individual!: Observable<any>;
+  resource!: Observable<any>;
 
   properties!: Observable<string[]>;
 
@@ -33,7 +33,7 @@ export class IndividualFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.api = this.route.data.pipe(map((data) => data['api']));
-    this.individual = this.route.data.pipe(map((data) => data['individual']));
+    this.resource = this.route.data.pipe(map((data) => data['resource']));
 
     this.populateForm();
 
@@ -64,9 +64,9 @@ export class IndividualFormComponent implements OnInit {
       uri: this.form.value.uri,
     };
 
-    this.individual.pipe(take(1)).subscribe((individual: any) => {
+    this.resource.pipe(take(1)).subscribe((resource: any) => {
       console.log('submit');
-      if (!!individual) {
+      if (!!resource) {
         const resource = btoa(this.form.value.uri);
         this.http
           .put(`${url}/resource:${resource}`, body)
@@ -79,10 +79,10 @@ export class IndividualFormComponent implements OnInit {
 
   private populateForm(): void {
     // TODO: this should combine latest of properties and create and populate form
-    this.individual.pipe(take(1)).subscribe((individual: any) => {
-      if (!!individual) {
-        this.form.controls['label'].setValue(individual.label);
-        this.form.controls['uri'].setValue(individual.uri);
+    this.resource.pipe(take(1)).subscribe((resource: any) => {
+      if (!!resource) {
+        this.form.controls['label'].setValue(resource.label);
+        this.form.controls['uri'].setValue(resource.uri);
         this.form.markAsPristine();
       }
     });

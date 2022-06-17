@@ -14,9 +14,7 @@ const routes: Routes = [
     data: {},
     canActivate: [],
     loadChildren: () =>
-      import('./collections/collections.module').then(
-        (m) => m.CollectionsModule,
-      ),
+      import('./collection/collection.module').then((m) => m.CollectionModule),
   },
   {
     path: '**',

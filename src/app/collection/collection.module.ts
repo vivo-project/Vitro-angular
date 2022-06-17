@@ -5,22 +5,28 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { SharedModule } from '../shared/shared.module';
-import { CollectionComponent } from './collection/collection.component';
-import { CollectionsRoutingModule } from './collections-routing.module';
-import { CollectionsComponent } from './collections.component';
+import { CollectionRoutingModule } from './collection-routing.module';
+import { CollectionComponent } from './collection.component';
+import { CollectionEffects } from './collection.effects';
+import * as fromCollection from './collection.reducer';
 import { IndividualFormComponent } from './individual-form/individual-form.component';
-import { IndividualComponent } from './individual/individual.component';
+import { IndividualListComponent } from './individual-list/individual-list.component';
+import { IndividualViewComponent } from './individual-view/individual-view.component';
 
 @NgModule({
   declarations: [
-    CollectionsComponent,
     CollectionComponent,
-    IndividualComponent,
     IndividualFormComponent,
+    IndividualListComponent,
+    IndividualViewComponent,
   ],
   imports: [
-    CollectionsRoutingModule,
+    CollectionRoutingModule,
+    EffectsModule.forFeature([CollectionEffects]),
+    StoreModule.forFeature(fromCollection.featureKey, fromCollection.reducer),
     FormsModule,
     SharedModule,
     MatButtonModule,
@@ -31,4 +37,4 @@ import { IndividualComponent } from './individual/individual.component';
     ReactiveFormsModule,
   ],
 })
-export class CollectionsModule {}
+export class CollectionModule {}

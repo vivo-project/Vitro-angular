@@ -7,11 +7,11 @@
 
     </div>
   </div>
-  <ng-container *ngIf="individual | async; let individual">
+  <ng-container *ngIf="resource | async; let resource">
     <mat-card>
       <mat-card-header>
-        <mat-card-title>{{ individual.label }}</mat-card-title>
-        <mat-card-subtitle>{{ individual.uri }}</mat-card-subtitle>
+        <mat-card-title>{{ resource.label }}</mat-card-title>
+        <mat-card-subtitle>{{ resource.uri }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
 

@@ -5,22 +5,22 @@ import { Api } from 'src/app/core/rest-api/rest-api.reducer';
 import { environment } from 'src/environments/environment';
 
 @Component({
-  selector: 'vitro-individual',
-  templateUrl: './individual.component.html',
-  styleUrls: ['./individual.component.scss'],
+  selector: 'vitro-individual-view',
+  templateUrl: './individual-view.component.html',
+  styleUrls: ['./individual-view.component.scss'],
 })
-export class IndividualComponent implements OnInit {
+export class IndividualViewComponent implements OnInit {
   api!: Observable<Api>;
 
-  individual!: Observable<any>;
+  resource!: Observable<any>;
 
   properties!: Observable<string[]>;
 
   constructor(private readonly route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.api = this.route.data.pipe(map((data) => data['api']));
-    this.individual = this.route.data.pipe(map((data) => data['individual']));
+    this.api = this.route.data.pipe(map((data: any) => data['api']));
+    this.resource = this.route.data.pipe(map((data: any) => data['resource']));
     this.properties = this.api.pipe(
       map((api: Api) => {
         const collectionAPi =

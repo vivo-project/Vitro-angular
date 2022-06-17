@@ -3,23 +3,7 @@ import { createFeatureSelector, createSelector } from '@ngrx/store';
 import * as fromRestApi from './rest-api.reducer';
 
 export const selectRestApiState = createFeatureSelector<fromRestApi.State>(
-  fromRestApi.restApiFeatureKey,
-);
-export const selectIsFetchingRestApi = createSelector(
-  selectRestApiState,
-  fromRestApi.selectFetchingRestApi,
-);
-export const selectOpenApi = createSelector(
-  selectRestApiState,
-  fromRestApi.selectOpenApi,
-);
-export const selectInfo = createSelector(
-  selectRestApiState,
-  fromRestApi.selectInfo,
-);
-export const selectRestApiIds = createSelector(
-  selectRestApiState,
-  fromRestApi.selectIds,
+  fromRestApi.featureKey,
 );
 export const selectRestApiEntities = createSelector(
   selectRestApiState,
@@ -35,6 +19,18 @@ export const selectApiById = (id: string) => {
     (entities: Dictionary<fromRestApi.Api>) => entities[id] as fromRestApi.Api,
   );
 };
+export const selectIsFetchingRestApi = createSelector(
+  selectRestApiState,
+  fromRestApi.selectFetchingRestApi,
+);
+export const selectOpenApi = createSelector(
+  selectRestApiState,
+  fromRestApi.selectOpenApi,
+);
+export const selectInfo = createSelector(
+  selectRestApiState,
+  fromRestApi.selectInfo,
+);
 export const selectErrorFetchingRestApi = createSelector(
   selectRestApiState,
   fromRestApi.selectError,

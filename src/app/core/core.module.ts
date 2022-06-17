@@ -12,7 +12,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../../environments/environment';
 import { metaReducers, reducers } from './reducers';
 import { RestApiEffects } from './rest-api/rest-api.effects';
-import * as fromRestApi from './rest-api/rest-api.reducer';
 import { TranslocoRootModule } from './transloco-root.module';
 
 const MODULES: any[] = [
@@ -21,7 +20,6 @@ const MODULES: any[] = [
   StoreModule.forRoot(reducers, {
     metaReducers,
   }),
-  StoreModule.forFeature(fromRestApi.restApiFeatureKey, fromRestApi.reducer),
   StoreRouterConnectingModule.forRoot(),
   StoreDevtoolsModule.instrument({
     maxAge: 25,

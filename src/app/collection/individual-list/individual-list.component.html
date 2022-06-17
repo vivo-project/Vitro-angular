@@ -11,12 +11,12 @@
       </a>
     </div>
   </div>
-  <ng-container *ngIf="collection | async; let collection">
+  <ng-container *ngIf="resources | async; let resources">
     <mat-card>
       <mat-selection-list [multiple]="false">
-        <ng-template ngFor let-individual [ngForOf]="collection.result" let-i="index" [ngForTrackBy]="trackByFn">
-          <a [routerLink]="[getResourceId(individual)]" class="link">
-            <mat-list-option>{{ individual.label }}</mat-list-option>
+        <ng-template ngFor let-resource [ngForOf]="resources" let-i="index" [ngForTrackBy]="trackByFn">
+          <a [routerLink]="[getResourceId(resource)]" class="link">
+            <mat-list-option>{{ resource.label }}</mat-list-option>
           </a>
           <mat-divider></mat-divider>
         </ng-template>
