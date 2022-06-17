@@ -80,7 +80,7 @@ export class CollectionEffects {
       ofType(CollectionActions.updateResource),
       concatMap(({ collection, id, resource }) =>
         this.http
-          .post(
+          .put(
             `${environment.apiBaseUrl}/rest/${environment.restVersion}/${collection}/resource:${id}`,
             resource,
             {
