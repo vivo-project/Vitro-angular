@@ -14,14 +14,10 @@ export class ResourceResolver implements Resolve<any> {
 
   resolve(route: ActivatedRouteSnapshot): Observable<any[]> {
     const collection = route.paramMap.get('collection') as string;
-    const resource = route.paramMap.get('resource') as string;
+    const id = route.paramMap.get('resource') as string;
 
-    this.store.dispatch(loadResource({ collection, resource }));
+    this.store.dispatch(loadResource({ collection, id }));
 
-    return this.store.pipe(
-      select(selectResourceById(resource)),
-      take(2),
-      skip(1),
-    );
+    return this.store.pipe(select(selectResourceById(id)), take(2), skip(1));
   }
 }

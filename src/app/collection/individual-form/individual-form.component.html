@@ -29,8 +29,6 @@
             <mat-error *ngIf="form.controls['uri'].hasError('required')">URI is required</mat-error>
           </mat-form-field>
 
-          <!-- TODO: iterate over properties creating appropriate form fields -->
-
         </mat-card-content>
         <mat-card-actions align="end">
           <button type="button" mat-button [disabled]="form.pristine" color="warn" (click)="onReset()">RESET</button>

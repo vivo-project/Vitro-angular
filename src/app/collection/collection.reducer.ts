@@ -7,6 +7,8 @@ export const featureKey = 'collection';
 export interface State extends EntityState<any> {
   fetchingResources: boolean;
   fetchingResource: boolean;
+  creatingResource: boolean;
+  updatingResource: boolean;
   error: any;
 }
 
@@ -21,6 +23,8 @@ export const adapter: EntityAdapter<any> = createEntityAdapter<any>({
 export const initialState: State = adapter.getInitialState({
   fetchingResources: false,
   fetchingResource: false,
+  creatingResource: false,
+  updatingResource: false,
   error: undefined,
 });
 
@@ -60,6 +64,36 @@ export const reducer = createReducer(
     fetchingResource: false,
     error,
   })),
+  on(CollectionActions.createResource, (state, {}) => ({
+    ...state,
+    createResource: true,
+  })),
+  on(CollectionActions.createResourceSuccess, (state, { resource }) => {
+    return adapter.addOne(resource, {
+      ...state,
+      createResource: false,
+    });
+  }),
+  on(CollectionActions.createResourceFailure, (state, { error }) => ({
+    ...state,
+    createResource: false,
+    error,
+  })),
+  on(CollectionActions.updateResource, (state, {}) => ({
+    ...state,
+    updatingResource: true,
+  })),
+  on(CollectionActions.updateResourceSuccess, (state, { resource }) => {
+    return adapter.updateOne(resource, {
+      ...state,
+      updatingResource: false,
+    });
+  }),
+  on(CollectionActions.updateResourceFailure, (state, { error }) => ({
+    ...state,
+    updatingResource: false,
+    error,
+  })),
 );
 
 export const { selectIds, selectEntities, selectAll, selectTotal } =
@@ -68,4 +102,6 @@ export const { selectIds, selectEntities, selectAll, selectTotal } =
 export const selectFetchingResources = (state: State) =>
   state.fetchingResources;
 export const selectFetchingResource = (state: State) => state.fetchingResource;
+export const selectCreatingResource = (state: State) => state.creatingResource;
+export const selectUpdatingResource = (state: State) => state.updatingResource;
 export const selectError = (state: State) => state.error;

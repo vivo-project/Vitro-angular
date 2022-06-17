@@ -17,7 +17,7 @@ export const loadResourcesFailure = createAction(
 
 export const loadResource = createAction(
   '[Collection] Load Resource',
-  props<{ collection: string; resource: string }>(),
+  props<{ collection: string; id: string }>(),
 );
 
 export const loadResourceSuccess = createAction(
@@ -27,5 +27,35 @@ export const loadResourceSuccess = createAction(
 
 export const loadResourceFailure = createAction(
   '[Collection] Load Resource Failure',
+  props<{ error: any }>(),
+);
+
+export const createResource = createAction(
+  '[Collection] Create Resource',
+  props<{ collection: string; resource: any }>(),
+);
+
+export const createResourceSuccess = createAction(
+  '[Collection] Create Resource Success',
+  props<{ collection: string; resource: any }>(),
+);
+
+export const createResourceFailure = createAction(
+  '[Collection] Create Resource Failure',
+  props<{ error: any }>(),
+);
+
+export const updateResource = createAction(
+  '[Collection] Update Resource',
+  props<{ collection: string; id: string; resource: any }>(),
+);
+
+export const updateResourceSuccess = createAction(
+  '[Collection] Update Resource Success',
+  props<{ collection: string; resource: any }>(),
+);
+
+export const updateResourceFailure = createAction(
+  '[Collection] Update Resource Failure',
   props<{ error: any }>(),
 );

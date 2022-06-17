@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, concatMap, map } from 'rxjs/operators';
@@ -32,10 +33,10 @@ export class CollectionEffects {
   loadResource = createEffect(() => {
     return this.actions.pipe(
       ofType(CollectionActions.loadResource),
-      concatMap(({ collection, resource }) =>
+      concatMap(({ collection, id }) =>
         this.http
           .get(
-            `${environment.apiBaseUrl}/rest/${environment.restVersion}/${collection}/resource:${resource}`,
+            `${environment.apiBaseUrl}/rest/${environment.restVersion}/${collection}/resource:${id}`,
             {
               headers: { Accept: 'application/json' },
             },
@@ -50,8 +51,72 @@ export class CollectionEffects {
     );
   });
 
+  createResource = createEffect(() => {
+    return this.actions.pipe(
+      ofType(CollectionActions.createResource),
+      concatMap(({ collection, resource }) =>
+        this.http
+          .post(
+            `${environment.apiBaseUrl}/rest/${environment.restVersion}/${collection}`,
+            resource,
+            {
+              headers: { Accept: 'application/json' },
+            },
+          )
+          .pipe(
+            map((data) =>
+              CollectionActions.createResourceSuccess({ collection, resource }),
+            ),
+            catchError((error) =>
+              of(CollectionActions.createResourceFailure({ error })),
+            ),
+          ),
+      ),
+    );
+  });
+
+  updateResource = createEffect(() => {
+    return this.actions.pipe(
+      ofType(CollectionActions.updateResource),
+      concatMap(({ collection, id, resource }) =>
+        this.http
+          .post(
+            `${environment.apiBaseUrl}/rest/${environment.restVersion}/${collection}/resource:${id}`,
+            resource,
+            {
+              headers: { Accept: 'application/json' },
+            },
+          )
+          .pipe(
+            map((data) =>
+              CollectionActions.updateResourceSuccess({ collection, resource }),
+            ),
+            catchError((error) =>
+              of(CollectionActions.updateResourceFailure({ error })),
+            ),
+          ),
+      ),
+    );
+  });
+
+  createOrUpdateResourceSuccess = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(
+          CollectionActions.createResourceSuccess,
+          CollectionActions.updateResourceSuccess,
+        ),
+        map(({ collection }) => this.router.navigate([`rest/${collection}`])),
+      );
+    },
+    {
+      dispatch: false,
+    },
+  );
+
   constructor(
     private readonly actions: Actions,
     private readonly http: HttpClient,
+    private readonly router: Router,
   ) {}
 }
