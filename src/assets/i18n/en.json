@@ -1,4 +1,9 @@
 {
   "title": "Vitro Angular",
-  "subtitle": "Vitro dynamic API front-end"
+  "subtitle": "Vitro dynamic API front-end",
+  "create": "Create",
+  "update": "Update",
+  "delete": "Delete",
+  "reset": "Reset",
+  "submit": "Submit"
 }
