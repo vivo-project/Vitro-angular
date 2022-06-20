@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { Observable, skip, take } from 'rxjs';
-import { loadResources } from './collection.actions';
+import { readResources } from './collection.actions';
 import * as fromCollection from './collection.reducer';
 import { selectResources } from './collection.selectors';
 
@@ -15,7 +15,7 @@ export class CollectionResolver implements Resolve<any[]> {
   resolve(route: ActivatedRouteSnapshot): Observable<any[]> {
     const collection = route.paramMap.get('collection') as string;
 
-    this.store.dispatch(loadResources({ collection }));
+    this.store.dispatch(readResources({ collection }));
 
     return this.store.pipe(select(selectResources), take(2), skip(1));
   }

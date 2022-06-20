@@ -21,8 +21,8 @@ export class IndividualFormComponent implements OnInit {
 
   constructor(
     private readonly route: ActivatedRoute,
+    private readonly store: Store<fromCollection.State>,
     private readonly formBuilder: FormBuilder,
-    private store: Store<fromCollection.State>,
   ) {
     this.form = this.formBuilder.group({
       label: [undefined, [Validators.required]],

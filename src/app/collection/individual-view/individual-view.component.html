@@ -17,7 +17,7 @@
 
       </mat-card-content>
       <mat-card-actions align="end">
-        <a mat-button color="warn" disabled>DELETE</a>
+        <a mat-button color="warn" (click)="onDelete(api, resource)">DELETE</a>
         <a mat-button [routerLink]="['update']">UPDATE</a>
       </mat-card-actions>
     </mat-card>

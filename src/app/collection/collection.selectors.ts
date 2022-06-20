@@ -4,9 +4,26 @@ import * as fromCollection from './collection.reducer';
 
 export const selectCollectionState =
   createFeatureSelector<fromCollection.State>(fromCollection.featureKey);
-export const selectIsFetchingResources = createSelector(
+
+export const selectIsCreatingResources = createSelector(
   selectCollectionState,
-  fromCollection.selectFetchingResources,
+  fromCollection.selectCreatingResource,
+);
+export const selectIsReadingResources = createSelector(
+  selectCollectionState,
+  fromCollection.selectReadingResources,
+);
+export const selectIsReadingResource = createSelector(
+  selectCollectionState,
+  fromCollection.selectReadingResource,
+);
+export const selectIsUpdatingResources = createSelector(
+  selectCollectionState,
+  fromCollection.selectUpdatingResource,
+);
+export const selectIsDeletingResources = createSelector(
+  selectCollectionState,
+  fromCollection.selectDeletingResource,
 );
 export const selectResourceEntities = createSelector(
   selectCollectionState,

@@ -9,48 +9,6 @@ import * as CollectionActions from './collection.actions';
 
 @Injectable()
 export class CollectionEffects {
-  loadResources = createEffect(() => {
-    return this.actions.pipe(
-      ofType(CollectionActions.loadResources),
-      concatMap(({ collection }) =>
-        this.http
-          .get(
-            `${environment.apiBaseUrl}/rest/${environment.restVersion}/${collection}`,
-            {
-              headers: { Accept: 'application/json' },
-            },
-          )
-          .pipe(
-            map((data) => CollectionActions.loadResourcesSuccess({ data })),
-            catchError((error) =>
-              of(CollectionActions.loadResourcesFailure({ error })),
-            ),
-          ),
-      ),
-    );
-  });
-
-  loadResource = createEffect(() => {
-    return this.actions.pipe(
-      ofType(CollectionActions.loadResource),
-      concatMap(({ collection, id }) =>
-        this.http
-          .get(
-            `${environment.apiBaseUrl}/rest/${environment.restVersion}/${collection}/resource:${id}`,
-            {
-              headers: { Accept: 'application/json' },
-            },
-          )
-          .pipe(
-            map((data) => CollectionActions.loadResourceSuccess({ data })),
-            catchError((error) =>
-              of(CollectionActions.loadResourceFailure({ error })),
-            ),
-          ),
-      ),
-    );
-  });
-
   createResource = createEffect(() => {
     return this.actions.pipe(
       ofType(CollectionActions.createResource),
@@ -69,6 +27,48 @@ export class CollectionEffects {
             ),
             catchError((error) =>
               of(CollectionActions.createResourceFailure({ error })),
+            ),
+          ),
+      ),
+    );
+  });
+
+  readResources = createEffect(() => {
+    return this.actions.pipe(
+      ofType(CollectionActions.readResources),
+      concatMap(({ collection }) =>
+        this.http
+          .get(
+            `${environment.apiBaseUrl}/rest/${environment.restVersion}/${collection}`,
+            {
+              headers: { Accept: 'application/json' },
+            },
+          )
+          .pipe(
+            map((data) => CollectionActions.readResourcesSuccess({ data })),
+            catchError((error) =>
+              of(CollectionActions.readResourcesFailure({ error })),
+            ),
+          ),
+      ),
+    );
+  });
+
+  readResource = createEffect(() => {
+    return this.actions.pipe(
+      ofType(CollectionActions.readResource),
+      concatMap(({ collection, id }) =>
+        this.http
+          .get(
+            `${environment.apiBaseUrl}/rest/${environment.restVersion}/${collection}/resource:${id}`,
+            {
+              headers: { Accept: 'application/json' },
+            },
+          )
+          .pipe(
+            map((data) => CollectionActions.readResourceSuccess({ data })),
+            catchError((error) =>
+              of(CollectionActions.readResourceFailure({ error })),
             ),
           ),
       ),
@@ -99,12 +99,36 @@ export class CollectionEffects {
     );
   });
 
-  createOrUpdateResourceSuccess = createEffect(
+  deleteResource = createEffect(() => {
+    return this.actions.pipe(
+      ofType(CollectionActions.deleteResource),
+      concatMap(({ collection, id, resource }) =>
+        this.http
+          .delete(
+            `${environment.apiBaseUrl}/rest/${environment.restVersion}/${collection}/resource:${id}`,
+            {
+              headers: { Accept: 'application/json' },
+            },
+          )
+          .pipe(
+            map(() =>
+              CollectionActions.deleteResourceSuccess({ collection, resource }),
+            ),
+            catchError((error) =>
+              of(CollectionActions.deleteResourceFailure({ error })),
+            ),
+          ),
+      ),
+    );
+  });
+
+  createUpdateOrDeleteResourceSuccess = createEffect(
     () =>
       this.actions.pipe(
         ofType(
           CollectionActions.createResourceSuccess,
           CollectionActions.updateResourceSuccess,
+          CollectionActions.deleteResourceSuccess,
         ),
         map(({ collection }) => this.router.navigate([`rest/${collection}`])),
       ),

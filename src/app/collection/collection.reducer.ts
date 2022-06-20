@@ -5,10 +5,11 @@ import * as CollectionActions from './collection.actions';
 export const featureKey = 'collection';
 
 export interface State extends EntityState<any> {
-  fetchingResources: boolean;
-  fetchingResource: boolean;
   creatingResource: boolean;
+  readingResources: boolean;
+  readingResource: boolean;
   updatingResource: boolean;
+  deletingResource: boolean;
   error: any;
 }
 
@@ -21,49 +22,16 @@ export const adapter: EntityAdapter<any> = createEntityAdapter<any>({
 });
 
 export const initialState: State = adapter.getInitialState({
-  fetchingResources: false,
-  fetchingResource: false,
   creatingResource: false,
+  readingResources: false,
+  readingResource: false,
   updatingResource: false,
+  deletingResource: false,
   error: undefined,
 });
 
 export const reducer = createReducer(
   initialState,
-  on(CollectionActions.loadResources, (state, {}) => ({
-    ...state,
-    fetchingResources: true,
-  })),
-  on(CollectionActions.loadResourcesSuccess, (state, { data }) => {
-    const { result } = data;
-
-    return adapter.setAll(result, {
-      ...state,
-      fetchingResources: false,
-    });
-  }),
-  on(CollectionActions.loadResourcesFailure, (state, { error }) => ({
-    ...state,
-    fetchingResources: false,
-    error,
-  })),
-  on(CollectionActions.loadResource, (state, {}) => ({
-    ...state,
-    fetchingResource: true,
-  })),
-  on(CollectionActions.loadResourceSuccess, (state, { data }) => {
-    const { result } = data;
-
-    return adapter.upsertOne(result[0], {
-      ...state,
-      fetchingResource: false,
-    });
-  }),
-  on(CollectionActions.loadResourceFailure, (state, { error }) => ({
-    ...state,
-    fetchingResource: false,
-    error,
-  })),
   on(CollectionActions.createResource, (state, {}) => ({
     ...state,
     createResource: true,
@@ -77,6 +45,40 @@ export const reducer = createReducer(
   on(CollectionActions.createResourceFailure, (state, { error }) => ({
     ...state,
     createResource: false,
+    error,
+  })),
+  on(CollectionActions.readResources, (state, {}) => ({
+    ...state,
+    readingResources: true,
+  })),
+  on(CollectionActions.readResourcesSuccess, (state, { data }) => {
+    const { result } = data;
+
+    return adapter.setAll(result, {
+      ...state,
+      readingResources: false,
+    });
+  }),
+  on(CollectionActions.readResourcesFailure, (state, { error }) => ({
+    ...state,
+    readingResources: false,
+    error,
+  })),
+  on(CollectionActions.readResource, (state, {}) => ({
+    ...state,
+    readingResource: true,
+  })),
+  on(CollectionActions.readResourceSuccess, (state, { data }) => {
+    const { result } = data;
+
+    return adapter.upsertOne(result[0], {
+      ...state,
+      readingResource: false,
+    });
+  }),
+  on(CollectionActions.readResourceFailure, (state, { error }) => ({
+    ...state,
+    readingResource: false,
     error,
   })),
   on(CollectionActions.updateResource, (state, {}) => ({
@@ -94,14 +96,29 @@ export const reducer = createReducer(
     updatingResource: false,
     error,
   })),
+  on(CollectionActions.deleteResource, (state, {}) => ({
+    ...state,
+    deletingResource: true,
+  })),
+  on(CollectionActions.deleteResourceSuccess, (state, { resource }) => {
+    return adapter.removeOne(resource, {
+      ...state,
+      deletingResource: false,
+    });
+  }),
+  on(CollectionActions.deleteResourceFailure, (state, { error }) => ({
+    ...state,
+    deletingResource: false,
+    error,
+  })),
 );
 
 export const { selectIds, selectEntities, selectAll, selectTotal } =
   adapter.getSelectors();
 
-export const selectFetchingResources = (state: State) =>
-  state.fetchingResources;
-export const selectFetchingResource = (state: State) => state.fetchingResource;
 export const selectCreatingResource = (state: State) => state.creatingResource;
+export const selectReadingResources = (state: State) => state.readingResources;
+export const selectReadingResource = (state: State) => state.readingResource;
 export const selectUpdatingResource = (state: State) => state.updatingResource;
+export const selectDeletingResource = (state: State) => state.deletingResource;
 export const selectError = (state: State) => state.error;

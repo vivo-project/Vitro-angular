@@ -10,12 +10,12 @@ describe('Collection Selectors', () => {
 
     expect(result).toEqual(fromCollection.initialState);
   });
-  it('should select fetching rest api', () => {
-    const result = CollectionSelectors.selectIsFetchingResources(initialState);
+  it('should select reading rest api', () => {
+    const result = CollectionSelectors.selectIsReadingResources(initialState);
 
     expect(result).toEqual(false);
   });
-  it('should select error fetching rest api', () => {
+  it('should select error reading rest api', () => {
     const result =
       CollectionSelectors.selectErrorFetchingResources(initialState);
 

@@ -3,23 +3,23 @@ import * as CollectionActions from './collection.actions';
 describe('loadResources', () => {
   it('should return an action', () => {
     expect(
-      CollectionActions.loadResources({ collection: 'geolocation' }).type,
-    ).toBe('[Collection] Load Resources');
+      CollectionActions.readResources({ collection: 'geolocation' }).type,
+    ).toBe('[Collection] Read Resources');
   });
 });
 
 describe('loadResourcesSuccess', () => {
   it('should return an action', () => {
-    const action = CollectionActions.loadResourcesSuccess({ data: {} });
-    expect(action.type).toBe('[Collection] Load Resources Success');
+    const action = CollectionActions.readResourcesSuccess({ data: {} });
+    expect(action.type).toBe('[Collection] Read Resources Success');
     expect(action.data).toEqual({});
   });
 });
 
 describe('loadResourcesFailure', () => {
   it('should return an action', () => {
-    const action = CollectionActions.loadResourcesFailure({ error: {} });
-    expect(action.type).toBe('[Collection] Load Resources Failure');
+    const action = CollectionActions.readResourcesFailure({ error: {} });
+    expect(action.type).toBe('[Collection] Read Resources Failure');
     expect(action.error).toEqual({});
   });
 });
