@@ -8,7 +8,10 @@
   <mat-drawer-content>
     <div class="app-sidenav-content">
       <div fxLayout="column" fxFlexFill>
-        <!-- header component -->
+          <span class="nav-tool-items">
+            <a mat-button routerLink="login" routerLinkActive="active">Login</a>
+            <a mat-button mat-raised-button routerLink="" routerLinkActive="active">Go to home</a>
+          </span>
         <main fxFlex>
           <!-- breadcrumb component -->
           <router-outlet></router-outlet>

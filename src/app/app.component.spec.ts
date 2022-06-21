@@ -5,6 +5,7 @@ import { StoreModule } from '@ngrx/store';
 import { AppComponent } from './app.component';
 import { metaReducers, reducers } from './core/reducers';
 import { SharedModule } from './shared/shared.module';
+import { FormsModule } from "@angular/forms";
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -16,6 +17,7 @@ describe('AppComponent', () => {
         NoopAnimationsModule,
         RouterTestingModule,
         SharedModule,
+        FormsModule,
         StoreModule.forRoot(reducers, { metaReducers }),
       ],
       declarations: [AppComponent],
