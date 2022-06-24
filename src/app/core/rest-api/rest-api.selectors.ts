@@ -19,6 +19,19 @@ export const selectApiById = (id: string) => {
     (entities: Dictionary<fromRestApi.Api>) => entities[id] as fromRestApi.Api,
   );
 };
+export const selectApiResponsePropertiesByIdAndMethod = (id: string, path: string, method: string) => {
+  return createSelector(
+    selectRestApiEntities,
+    (entities: Dictionary<fromRestApi.Api>) => {
+      const entity = entities[id] as fromRestApi.Api
+      return entity.paths[path][method]
+        .responses[200]
+        .content['application/json']
+        .schema
+        .properties;
+    },
+  );
+};
 export const selectIsFetchingRestApi = createSelector(
   selectRestApiState,
   fromRestApi.selectFetchingRestApi,

@@ -22,7 +22,7 @@ describe('IndividualViewComponent', () => {
           fromCollection.featureKey,
           fromCollection.reducer,
         ),
-        getTranslocoModule()
+        getTranslocoModule(),
       ],
     }).compileComponents();
   });
