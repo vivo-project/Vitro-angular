@@ -1,0 +1,6 @@
+<mat-selection-list [multiple]="false">
+  <ng-template ngFor let-api [ngForOf]="apis | async" let-i="index" [ngForTrackBy]="trackByFn">
+    <a [routerLink]="['/rest', api.tag.name]" class="link"><mat-list-option>{{ api.tag.description }}</mat-list-option></a>
+    <mat-divider></mat-divider>
+  </ng-template>
+</mat-selection-list>

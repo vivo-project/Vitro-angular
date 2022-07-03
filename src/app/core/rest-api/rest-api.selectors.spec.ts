@@ -3,7 +3,7 @@ import * as RestApiSelectors from './rest-api.selectors';
 
 describe('RestApi Selectors', () => {
   const initialState = {
-    [fromRestApi.restApiFeatureKey]: fromRestApi.initialState,
+    [fromRestApi.featureKey]: fromRestApi.initialState,
   };
   it('should select the feature state', () => {
     const result = RestApiSelectors.selectRestApiState(initialState);
@@ -16,9 +16,9 @@ describe('RestApi Selectors', () => {
     expect(result).toEqual(false);
   });
   it('should select rest api', () => {
-    const result = RestApiSelectors.selectRestApi(initialState);
+    const result = RestApiSelectors.selectOpenApi(initialState);
 
-    expect(result).toEqual({});
+    expect(result).toEqual('');
   });
   it('should select error fetching rest api', () => {
     const result = RestApiSelectors.selectErrorFetchingRestApi(initialState);

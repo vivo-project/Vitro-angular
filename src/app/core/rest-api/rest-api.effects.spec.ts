@@ -25,7 +25,7 @@ describe('RestApiEffects', () => {
         RestApiEffects,
         provideMockStore({
           initialState: {
-            [fromRestApi.restApiFeatureKey]: fromRestApi.initialState,
+            [fromRestApi.featureKey]: fromRestApi.initialState,
           },
         }),
         provideMockActions(() => actions),
