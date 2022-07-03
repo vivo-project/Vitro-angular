@@ -10,6 +10,13 @@ const routes: Routes = [
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
   {
+    path: 'rest',
+    data: {},
+    canActivate: [],
+    loadChildren: () =>
+      import('./collection/collection.module').then((m) => m.CollectionModule),
+  },
+  {
     path: '**',
     redirectTo: '',
   },

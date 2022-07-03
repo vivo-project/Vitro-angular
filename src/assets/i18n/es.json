@@ -1,4 +1,9 @@
 {
   "title": "Vitro Angular",
-  "subtitle": "Front-end de la API dinámica de Vitro"
+  "subtitle": "Front-end de la API dinámica de Vitro",
+  "create": "Crear",
+  "update": "Actualizar",
+  "delete": "Borrar",
+  "reset": "Reiniciar",
+  "submit": "Enviar"
 }

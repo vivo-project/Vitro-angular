@@ -20,16 +20,35 @@ describe('RestApi Reducer', () => {
         fetchingRestApi: true,
       });
     });
-    it('should return the previous state with fetchingRestApi false and data defined', () => {
+    it('should return the previous state with fetchingRestApi false and info defined', () => {
       const result = reducer(
         initialState,
-        RestApiActions.loadRestApiSuccess({ data: {} }),
+        RestApiActions.loadRestApiSuccess({
+          data: {
+            openapi: '3.0.2',
+            info: {
+              title: 'Test',
+              description: 'This is a test',
+              version: '0.0.1',
+            },
+            tags: [],
+            paths: {},
+          },
+        }),
       );
 
       expect(result).toEqual({
         ...initialState,
         fetchingRestApi: false,
-        data: {},
+        ids: [],
+        entities: {},
+        openapi: '3.0.2',
+        info: {
+          title: 'Test',
+          description: 'This is a test',
+          version: '0.0.1',
+        },
+        error: undefined,
       });
     });
     it('should return the previous state with fetchingRestApi false and error defined', () => {

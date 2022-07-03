@@ -5,22 +5,25 @@ import { Action } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, concatMap, map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import * as restApiActions from './rest-api.actions';
+import * as RestApiActions from './rest-api.actions';
 
 @Injectable()
 export class RestApiEffects implements OnInitEffects {
   loadRestApi = createEffect(() => {
     return this.actions.pipe(
-      ofType(restApiActions.loadRestApi),
+      ofType(RestApiActions.loadRestApi),
       concatMap(() =>
         this.http
-          .get(`${environment.apiBaseUrl}/docs/rest/1`, {
-            headers: { Accept: 'application/json' },
-          })
+          .get(
+            `${environment.apiBaseUrl}/docs/rest/${environment.restVersion}`,
+            {
+              headers: { Accept: 'application/json' },
+            },
+          )
           .pipe(
-            map((data) => restApiActions.loadRestApiSuccess({ data })),
+            map((data) => RestApiActions.loadRestApiSuccess({ data })),
             catchError((error) =>
-              of(restApiActions.loadRestApiFailure({ error })),
+              of(RestApiActions.loadRestApiFailure({ error })),
             ),
           ),
       ),
@@ -33,6 +36,6 @@ export class RestApiEffects implements OnInitEffects {
   ) {}
 
   ngrxOnInitEffects(): Action {
-    return restApiActions.loadRestApi();
+    return RestApiActions.loadRestApi();
   }
 }
