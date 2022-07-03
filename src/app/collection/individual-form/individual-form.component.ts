@@ -51,7 +51,7 @@ export class IndividualFormComponent implements OnInit {
 
     this.resource.pipe(take(1)).subscribe((resource: any) => {
       if (!!resource) {
-        const id = btoa(this.form.value.uri);
+        const id = btoa(resource.uri);
         this.store.dispatch(
           CollectionActions.updateResource({
             collection,
